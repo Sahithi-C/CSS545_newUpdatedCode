@@ -1,6 +1,7 @@
 package com.example.vegetarianrecipeseeker;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -61,10 +62,6 @@ public class homeScreen extends AppCompatActivity {
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
-        listView = findViewById(R.id.listView);
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_customtext, dishesList);
-        listView.setAdapter(arrayAdapter);
-
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -76,26 +73,16 @@ public class homeScreen extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.actionbar_menu, menu);
         MenuItem menuItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setQueryHint("Search here");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                arrayAdapter.getFilter().filter(newText);
-
-                return false;
-            }
+        searchView.setOnSearchClickListener(view -> {
+            // Start the new activity when search is clicked
+            Intent intent = new Intent(homeScreen.this, SearchActivity.class);
+            startActivity(intent);
         });
-
 
         return super.onCreateOptionsMenu(menu);
     }
