@@ -50,52 +50,73 @@ public class RecipeDetailActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("Favorites", MODE_PRIVATE);
         favorites = sharedPreferences.getStringSet("favorites", new HashSet<>());
 
-        // Retrieve data from intent
-        Intent intent = getIntent();
-        String title = intent.getStringExtra("RECIPE_TITLE");
-        int imageResource = R.drawable.logo1; // Replace with a default image or specific image logic
+        // Restore savedInstanceState if available
+        if (savedInstanceState != null) {
+            // Restore data from savedInstanceState
+            String title = savedInstanceState.getString("RECIPE_TITLE");
+            String ingredients = savedInstanceState.getString("RECIPE_INGREDIENTS");
+            String instructions = savedInstanceState.getString("RECIPE_INSTRUCTIONS");
+            boolean isFavorite = savedInstanceState.getBoolean("IS_FAVORITE");
 
-        // Set title and image
-        recipeTitle.setText(title);
-        recipeImage.setImageResource(imageResource);
-
-        // Check if the recipe is Biryani
-        if ("Biryani".equalsIgnoreCase(title)) {
-            String ingredients = "Compulsory Ingredients Required:\n" +
-                    "1 big Onion, 2 big tomatoes (puree), 250 gms Rice, 2 tbsp Curd, 1 tbsp Ginger-Garlic paste.\n\n" +
-                    "Optional Ingredients:\n" +
-                    "2 cups of vegetables (carrot, bell pepper, cauliflower, peas, beans, cottage cheese (paneer)).\n\n" +
-                    "Compulsory Spices Required:\n" +
-                    "1 tbsp Red Chili Powder, 1 tbsp Salt, 1/4 tbsp Turmeric Powder, 1 tbsp Coriander Powder, " +
-                    "1/4 tbsp Cumin Powder, Bay Leaf, Cinnamon Stick, Green Cardamom, Cloves, Star Anise.\n\n" +
-                    "Optional Spices:\n" +
-                    "2 pinches of dried Kasuri Methi.";
-
-            String instructions = "Recipe:\n" +
-                    "1. Cook rice until al dente (Basmati rice recommended).\n" +
-                    "2. Heat 4 tbsp of oil in a pan.\n" +
-                    "3. Add whole spices: cumin seeds, bay leaf, cardamom, cloves, cinnamon stick, star anise.\n" +
-                    "4. Add julienned onions and cook until golden brown.\n" +
-                    "5. Lower heat, add ginger-garlic paste, and ground spices. Cook for 2 mins.\n" +
-                    "6. (Optional) Add vegetables and cook for 5-7 mins.\n" +
-                    "7. Add curd and let cook for 5 mins.\n" +
-                    "8. Add tomato puree, salt, and kasuri methi. Cook until water evaporates.\n" +
-                    "9. (Optional) Add paneer cubes, lightly pan-fried.\n" +
-                    "10. Add 1/2 glass of water.\n" +
-                    "11. Add rice on top, garnish, and steam for 10-15 mins.\n" +
-                    "Serve hot!";
-
-            // Set detailed recipe
+            // Set restored data to views
+            recipeTitle.setText(title);
             ingredientsList.setText(ingredients);
             instructionsList.setText(instructions);
+            favoriteButton.setImageResource(isFavorite ? R.drawable.baseline_favorite_24 : R.drawable.baseline_favorite_border_24);
+
+            if (isFavorite) {
+                favorites.add(title);
+            } else {
+                favorites.remove(title);
+            }
         } else {
-            // Show a generic message for other recipes
-            ingredientsList.setText("Ingredients: Not Available for " + title);
-            instructionsList.setText("Instructions: Not Available for " + title);
+            // Retrieve data from Intent for the first-time launch
+            Intent intent = getIntent();
+            String title = intent.getStringExtra("RECIPE_TITLE");
+            int imageResource = R.drawable.logo1; // Replace with a default or specific image logic
+
+            // Set title and image
+            recipeTitle.setText(title);
+            recipeImage.setImageResource(imageResource);
+
+            // Check if the recipe is Biryani
+            if ("Biryani".equalsIgnoreCase(title)) {
+                String ingredients = "Compulsory Ingredients Required:\n" +
+                        "1 big Onion, 2 big tomatoes (puree), 250 gms Rice, 2 tbsp Curd, 1 tbsp Ginger-Garlic paste.\n\n" +
+                        "Optional Ingredients:\n" +
+                        "2 cups of vegetables (carrot, bell pepper, cauliflower, peas, beans, cottage cheese (paneer)).\n\n" +
+                        "Compulsory Spices Required:\n" +
+                        "1 tbsp Red Chili Powder, 1 tbsp Salt, 1/4 tbsp Turmeric Powder, 1 tbsp Coriander Powder, " +
+                        "1/4 tbsp Cumin Powder, Bay Leaf, Cinnamon Stick, Green Cardamom, Cloves, Star Anise.\n\n" +
+                        "Optional Spices:\n" +
+                        "2 pinches of dried Kasuri Methi.";
+
+                String instructions = "Recipe:\n" +
+                        "1. Cook rice until al dente (Basmati rice recommended).\n" +
+                        "2. Heat 4 tbsp of oil in a pan.\n" +
+                        "3. Add whole spices: cumin seeds, bay leaf, cardamom, cloves, cinnamon stick, star anise.\n" +
+                        "4. Add julienned onions and cook until golden brown.\n" +
+                        "5. Lower heat, add ginger-garlic paste, and ground spices. Cook for 2 mins.\n" +
+                        "6. (Optional) Add vegetables and cook for 5-7 mins.\n" +
+                        "7. Add curd and let cook for 5 mins.\n" +
+                        "8. Add tomato puree, salt, and kasuri methi. Cook until water evaporates.\n" +
+                        "9. (Optional) Add paneer cubes, lightly pan-fried.\n" +
+                        "10. Add 1/2 glass of water.\n" +
+                        "11. Add rice on top, garnish, and steam for 10-15 mins.\n" +
+                        "Serve hot!";
+
+                // Set detailed recipe
+                ingredientsList.setText(ingredients);
+                instructionsList.setText(instructions);
+            } else {
+                // Show a generic message for other recipes
+                ingredientsList.setText("Ingredients: Not Available for " + title);
+                instructionsList.setText("Instructions: Not Available for " + title);
+            }
         }
 
-        // Check if the recipe is favorited
-        if (favorites.contains(title)) {
+        // Set favorite icon based on SharedPreferences
+        if (favorites.contains(recipeTitle.getText().toString())) {
             favoriteButton.setImageResource(R.drawable.baseline_favorite_24); // Favorited icon
         } else {
             favoriteButton.setImageResource(R.drawable.baseline_favorite_border_24); // Not favorited icon
@@ -113,15 +134,26 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         // Set click listener for favorite button
         favoriteButton.setOnClickListener(v -> {
+            String title = recipeTitle.getText().toString();
             if (favorites.contains(title)) {
                 favorites.remove(title);
-                favoriteButton.setImageResource(R.drawable.baseline_favorite_border_24); // Change to not favorited icon
+                favoriteButton.setImageResource(R.drawable.baseline_favorite_border_24); // Not favorited icon
             } else {
                 favorites.add(title);
-                favoriteButton.setImageResource(R.drawable.baseline_favorite_24); // Change to favorited icon
+                favoriteButton.setImageResource(R.drawable.baseline_favorite_24); // Favorited icon
             }
             // Save updated favorites
             sharedPreferences.edit().putStringSet("favorites", favorites).apply();
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save the current recipe details
+        outState.putString("RECIPE_TITLE", recipeTitle.getText().toString());
+        outState.putString("RECIPE_INGREDIENTS", ingredientsList.getText().toString());
+        outState.putString("RECIPE_INSTRUCTIONS", instructionsList.getText().toString());
+        outState.putBoolean("IS_FAVORITE", favorites.contains(recipeTitle.getText().toString()));
     }
 }
