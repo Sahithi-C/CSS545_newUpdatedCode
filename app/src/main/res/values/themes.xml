@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.VegetarianRecipeSeeker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/purple</item>
-        <item name="colorPrimaryVariant">@color/purple</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blue</item>

@@ -36,9 +36,6 @@ import androidx.appcompat.widget.Toolbar;
 public class homeScreen extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
-    ListView listView;
-    ArrayAdapter<String> arrayAdapter;
-    String[] dishesList = {"Biryani", "Paneer Butter Masala", "Corn Rice", "Fried Rice", "Okra Curry", "Beans Curry", "Carrot Curry"};
 
 
     @Override

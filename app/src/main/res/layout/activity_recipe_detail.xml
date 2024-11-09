@@ -1,107 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!-- Back Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Back Button -->
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_arrow_back_24"
+                app:tint="@color/blue"
+                android:contentDescription="Back"
+                android:padding="8dp" />
+
+            <!-- Home Button -->
+            <ImageView
+                android:id="@+id/homeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_home_24"
+                app:tint="@color/blue"
+                android:contentDescription="Home"
+                android:padding="8dp" />
+        </LinearLayout>
+
+        <!-- Recipe image at the center top -->
         <ImageView
-            android:id="@+id/backButton"
+            android:id="@+id/recipeImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="8dp"
+            android:contentDescription="Recipe Image" />
+
+        <!-- Favorite Button (Heart Icon) -->
+        <ImageView
+            android:id="@+id/favoriteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_arrow_back_24"
-            app:tint="@color/blue"
-            android:contentDescription="Back"
-            android:padding="8dp" />
+            android:layout_gravity="end"
+            android:layout_marginTop="-40dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/baseline_favorite_24"
+            android:contentDescription="Favorite"
+            app:tint="@color/red" />
 
-        <!-- Home Button -->
-        <ImageView
-            android:id="@+id/homeButton"
+        <!-- Recipe title -->
+        <TextView
+            android:id="@+id/recipeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_home_24"
-            app:tint="@color/blue"
-            android:contentDescription="Home"
-            android:padding="8dp" />
+            android:layout_marginTop="16dp"
+            android:text="Recipe Title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <!-- Ingredients heading -->
+        <TextView
+            android:id="@+id/ingredientsHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Ingredients:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/blue" />
+
+        <!-- Ingredients list -->
+        <TextView
+            android:id="@+id/ingredientsList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/black" />
+
+        <!-- Instructions heading -->
+        <TextView
+            android:id="@+id/instructionsHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Instructions:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/blue" />
+
+        <!-- Instructions list -->
+        <TextView
+            android:id="@+id/instructionsList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black" />
     </LinearLayout>
-
-    <!-- Recipe image at the center top -->
-    <ImageView
-        android:id="@+id/recipeImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="8dp"
-        android:contentDescription="Recipe Image" />
-
-    <!-- Favorite Button (Heart Icon) -->
-    <ImageView
-        android:id="@+id/favoriteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="-40dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/baseline_favorite_24"
-        android:contentDescription="Favorite"
-        app:tint="@color/red" />
-
-    <!-- Recipe title -->
-    <TextView
-        android:id="@+id/recipeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Recipe Title"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black" />
-
-    <!-- Ingredients heading -->
-    <TextView
-        android:id="@+id/ingredientsHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Ingredients:"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="@color/blue" />
-
-    <!-- Ingredients list -->
-    <TextView
-        android:id="@+id/ingredientsList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Mandatory Ingredients:\n1 big Onion, 2 big tomatoes (puree), 250 gms Rice, 2 tbsp Curd, 1 tbsp Ginger-Garlic paste.\n\nOptional Ingredients:\n2 cups of vegetables (carrot, bell pepper, cauliflower, peas, beans, cottage cheese (paneer))."
-        android:textColor="@color/black" />
-
-    <!-- Instructions heading -->
-    <TextView
-        android:id="@+id/instructionsHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Instructions:"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="@color/blue" />
-
-    <!-- Instructions list -->
-    <TextView
-        android:id="@+id/instructionsList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Recipe:\n1. Cook rice until al dente (Basmati rice recommended).\n2. Heat 4 tbsp of oil in a pan.\n3. Add whole spices: cumin seeds, bay leaf, cardamom, cloves, cinnamon stick, star anise.\n4. Add julienned onions and cook until golden brown.\n5. Lower heat, add ginger-garlic paste, and ground spices. Cook for 2 mins.\n6. (Optional) Add vegetables and cook for 5-7 mins.\n7. Add curd and let cook for 5 mins.\n8. Add tomato puree, salt, and kasuri methi. Cook until water evaporates.\n9. (Optional) Add paneer cubes, lightly pan-fried.\n10. Add 1/2 glass of water.\n11. Add rice on top, garnish, and steam for 10-15 mins.\nServe hot!"
-        android:textColor="@color/black" />
-</LinearLayout>
+</ScrollView>

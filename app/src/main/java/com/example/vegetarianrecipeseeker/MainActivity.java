@@ -1,3 +1,4 @@
+
 package com.example.vegetarianrecipeseeker;
 
 import android.content.Intent;

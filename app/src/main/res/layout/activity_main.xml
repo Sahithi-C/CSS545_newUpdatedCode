@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/loginbkg"
+    android:background="@drawable/cooking1"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
@@ -25,7 +25,7 @@
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:padding="30dp">
-            
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:layout_marginTop="20dp">
 
             </EditText>
-            
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"

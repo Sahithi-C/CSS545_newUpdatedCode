@@ -1,159 +1,138 @@
 package com.example.vegetarianrecipeseeker;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class RecipeDetailActivity extends AppCompatActivity {
+    private RecipeDBHelper dbHelper;
+    private RecipeDBHelper.Recipe currentRecipe;
+    private ImageView favoriteButton;
 
-    private Set<String> favorites;
-    private SharedPreferences sharedPreferences;
-
-    private ImageView recipeImage;
-    private TextView recipeTitle, ingredientsList, instructionsList;
-    private ImageView backButton, homeButton, favoriteButton;
+    // Key for saving state
+    private static final String KEY_RECIPE_TITLE = "recipe_title";
+    private static final String KEY_SCROLL_POSITION = "scroll_position";
+    private static final String KEY_IS_FAVORITE = "is_favorite";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_recipe_detail);
 
-        // Apply window insets for edge-to-edge experience
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        // Initialize database helper
+        dbHelper = new RecipeDBHelper(this);
 
-        // Initialize views
-        backButton = findViewById(R.id.backButton);
-        homeButton = findViewById(R.id.homeButton);
-        recipeImage = findViewById(R.id.recipeImage);
-        recipeTitle = findViewById(R.id.recipeTitle);
-        ingredientsList = findViewById(R.id.ingredientsList);
-        instructionsList = findViewById(R.id.instructionsList);
-        favoriteButton = findViewById(R.id.favoriteButton);
+        // Setup back button
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> onBackPressed());
 
-        // Initialize SharedPreferences
-        sharedPreferences = getSharedPreferences("Favorites", MODE_PRIVATE);
-        favorites = sharedPreferences.getStringSet("favorites", new HashSet<>());
-
-        // Restore savedInstanceState if available
-        if (savedInstanceState != null) {
-            // Restore data from savedInstanceState
-            String title = savedInstanceState.getString("RECIPE_TITLE");
-            String ingredients = savedInstanceState.getString("RECIPE_INGREDIENTS");
-            String instructions = savedInstanceState.getString("RECIPE_INSTRUCTIONS");
-            boolean isFavorite = savedInstanceState.getBoolean("IS_FAVORITE");
-
-            // Set restored data to views
-            recipeTitle.setText(title);
-            ingredientsList.setText(ingredients);
-            instructionsList.setText(instructions);
-            favoriteButton.setImageResource(isFavorite ? R.drawable.baseline_favorite_24 : R.drawable.baseline_favorite_border_24);
-
-            if (isFavorite) {
-                favorites.add(title);
-            } else {
-                favorites.remove(title);
-            }
-        } else {
-            // Retrieve data from Intent for the first-time launch
-            Intent intent = getIntent();
-            String title = intent.getStringExtra("RECIPE_TITLE");
-            int imageResource = R.drawable.logo1; // Replace with a default or specific image logic
-
-            // Set title and image
-            recipeTitle.setText(title);
-            recipeImage.setImageResource(imageResource);
-
-            // Check if the recipe is Biryani
-            if ("Biryani".equalsIgnoreCase(title)) {
-                String ingredients = "Compulsory Ingredients Required:\n" +
-                        "1 big Onion, 2 big tomatoes (puree), 250 gms Rice, 2 tbsp Curd, 1 tbsp Ginger-Garlic paste.\n\n" +
-                        "Optional Ingredients:\n" +
-                        "2 cups of vegetables (carrot, bell pepper, cauliflower, peas, beans, cottage cheese (paneer)).\n\n" +
-                        "Compulsory Spices Required:\n" +
-                        "1 tbsp Red Chili Powder, 1 tbsp Salt, 1/4 tbsp Turmeric Powder, 1 tbsp Coriander Powder, " +
-                        "1/4 tbsp Cumin Powder, Bay Leaf, Cinnamon Stick, Green Cardamom, Cloves, Star Anise.\n\n" +
-                        "Optional Spices:\n" +
-                        "2 pinches of dried Kasuri Methi.";
-
-                String instructions = "Recipe:\n" +
-                        "1. Cook rice until al dente (Basmati rice recommended).\n" +
-                        "2. Heat 4 tbsp of oil in a pan.\n" +
-                        "3. Add whole spices: cumin seeds, bay leaf, cardamom, cloves, cinnamon stick, star anise.\n" +
-                        "4. Add julienned onions and cook until golden brown.\n" +
-                        "5. Lower heat, add ginger-garlic paste, and ground spices. Cook for 2 mins.\n" +
-                        "6. (Optional) Add vegetables and cook for 5-7 mins.\n" +
-                        "7. Add curd and let cook for 5 mins.\n" +
-                        "8. Add tomato puree, salt, and kasuri methi. Cook until water evaporates.\n" +
-                        "9. (Optional) Add paneer cubes, lightly pan-fried.\n" +
-                        "10. Add 1/2 glass of water.\n" +
-                        "11. Add rice on top, garnish, and steam for 10-15 mins.\n" +
-                        "Serve hot!";
-
-                // Set detailed recipe
-                ingredientsList.setText(ingredients);
-                instructionsList.setText(instructions);
-            } else {
-                // Show a generic message for other recipes
-                ingredientsList.setText("Ingredients: Not Available for " + title);
-                instructionsList.setText("Instructions: Not Available for " + title);
-            }
-        }
-
-        // Set favorite icon based on SharedPreferences
-        if (favorites.contains(recipeTitle.getText().toString())) {
-            favoriteButton.setImageResource(R.drawable.baseline_favorite_24); // Favorited icon
-        } else {
-            favoriteButton.setImageResource(R.drawable.baseline_favorite_border_24); // Not favorited icon
-        }
-
-        // Set click listeners for back and home buttons
-        backButton.setOnClickListener(v -> onBackPressed()); // Go back to the previous activity
-
+        // Setup home button
+        ImageView homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
-            Intent homeIntent = new Intent(RecipeDetailActivity.this, homeScreen.class); // Replace with your actual home activity class
-            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(homeIntent); // Start HomeActivity
-            finish(); // Close RecipeDetailActivity
+            Intent intent = new Intent(RecipeDetailActivity.this, homeScreen.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         });
 
-        // Set click listener for favorite button
-        favoriteButton.setOnClickListener(v -> {
-            String title = recipeTitle.getText().toString();
-            if (favorites.contains(title)) {
-                favorites.remove(title);
-                favoriteButton.setImageResource(R.drawable.baseline_favorite_border_24); // Not favorited icon
-            } else {
-                favorites.add(title);
-                favoriteButton.setImageResource(R.drawable.baseline_favorite_24); // Favorited icon
-            }
-            // Save updated favorites
-            sharedPreferences.edit().putStringSet("favorites", favorites).apply();
-        });
+        // Check if we're recreating from a saved state
+        String recipeTitle;
+        if (savedInstanceState != null) {
+            recipeTitle = savedInstanceState.getString(KEY_RECIPE_TITLE);
+            // Restore scroll position after the layout is complete
+            final int scrollPosition = savedInstanceState.getInt(KEY_SCROLL_POSITION);
+            findViewById(R.id.main).post(() -> {
+                findViewById(R.id.main).scrollTo(0, scrollPosition);
+            });
+        } else {
+            // Get recipe title from intent
+            recipeTitle = getIntent().getStringExtra("RECIPE_TITLE");
+        }
+
+        if (recipeTitle != null) {
+            // Load recipe details from database
+            currentRecipe = dbHelper.getRecipeByTitle(recipeTitle);
+            displayRecipe();
+        }
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onResume() {
+        super.onResume();
+        // Refresh recipe data in case it was modified elsewhere
+        if (currentRecipe != null) {
+            currentRecipe = dbHelper.getRecipeByTitle(currentRecipe.title);
+            displayRecipe();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        // Save the current recipe details
-        outState.putString("RECIPE_TITLE", recipeTitle.getText().toString());
-        outState.putString("RECIPE_INGREDIENTS", ingredientsList.getText().toString());
-        outState.putString("RECIPE_INSTRUCTIONS", instructionsList.getText().toString());
-        outState.putBoolean("IS_FAVORITE", favorites.contains(recipeTitle.getText().toString()));
+        // Save the current recipe title
+        if (currentRecipe != null) {
+            outState.putString(KEY_RECIPE_TITLE, currentRecipe.title);
+            outState.putBoolean(KEY_IS_FAVORITE, currentRecipe.isFavorite);
+        }
+        // Save scroll position
+        outState.putInt(KEY_SCROLL_POSITION, findViewById(R.id.main).getScrollY());
+    }
+
+    private void displayRecipe() {
+        // Find all views
+        TextView titleView = findViewById(R.id.recipeTitle);
+        TextView ingredientsList = findViewById(R.id.ingredientsList);
+        TextView instructionsList = findViewById(R.id.instructionsList);
+        ImageView recipeImage = findViewById(R.id.recipeImage);
+        favoriteButton = findViewById(R.id.favoriteButton);
+
+        // Set recipe title
+        titleView.setText(currentRecipe.title);
+
+        // Build ingredients text
+        StringBuilder ingredients = new StringBuilder("Mandatory Ingredients:\n");
+        for (String ingredient : currentRecipe.mandatoryIngredients) {
+            ingredients.append(ingredient).append("\n");
+        }
+        ingredients.append("\nOptional Ingredients:\n");
+        for (String ingredient : currentRecipe.optionalIngredients) {
+            ingredients.append(ingredient).append("\n");
+        }
+        ingredientsList.setText(ingredients.toString());
+
+        // Build instructions text
+        StringBuilder instructions = new StringBuilder("Recipe:\n");
+        for (int i = 0; i < currentRecipe.instructions.size(); i++) {
+            instructions.append(i + 1)
+                    .append(". ")
+                    .append(currentRecipe.instructions.get(i))
+                    .append("\n");
+        }
+        instructionsList.setText(instructions.toString());
+
+        // Set favorite button state and click listener
+        updateFavoriteButton();
+        favoriteButton.setOnClickListener(v -> toggleFavorite());
+    }
+
+    private void updateFavoriteButton() {
+        favoriteButton.setImageResource(currentRecipe.isFavorite ?
+                R.drawable.baseline_favorite_24 :
+                R.drawable.baseline_favorite_border_24);
+    }
+
+    private void toggleFavorite() {
+        currentRecipe.isFavorite = !currentRecipe.isFavorite;
+        dbHelper.updateFavoriteStatus(currentRecipe.id, currentRecipe.isFavorite);
+        updateFavoriteButton();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
