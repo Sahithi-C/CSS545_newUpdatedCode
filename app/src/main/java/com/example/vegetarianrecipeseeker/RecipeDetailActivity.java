@@ -1,3 +1,4 @@
+
 package com.example.vegetarianrecipeseeker;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class RecipeDetailActivity extends AppCompatActivity {
     private RecipeDBHelper dbHelper;
@@ -117,6 +119,27 @@ public class RecipeDetailActivity extends AppCompatActivity {
         // Set favorite button state and click listener
         updateFavoriteButton();
         favoriteButton.setOnClickListener(v -> toggleFavorite());
+
+        ImageView spiceLevelIcon = findViewById(R.id.spiceLevelIcon);
+        TextView spiceLevelText = findViewById(R.id.spiceLevelText);
+        int spiceLevel = currentRecipe.getSpiceLevel(); // Retrieve spice level from the database
+        switch (spiceLevel) {
+            case 1: // Low
+                spiceLevelIcon.setColorFilter(ContextCompat.getColor(this, R.color.green));
+                spiceLevelText.setText("Low");
+                spiceLevelText.setTextColor(ContextCompat.getColor(this, R.color.green));
+                break;
+            case 2: // Medium
+                spiceLevelIcon.setColorFilter(ContextCompat.getColor(this, R.color.yellow));
+                spiceLevelText.setText("Medium");
+                spiceLevelText.setTextColor(ContextCompat.getColor(this, R.color.yellow));
+                break;
+            case 3: // High
+                spiceLevelIcon.setColorFilter(ContextCompat.getColor(this, R.color.red));
+                spiceLevelText.setText("High");
+                spiceLevelText.setTextColor(ContextCompat.getColor(this, R.color.red));
+                break;
+        }
     }
 
     private void updateFavoriteButton() {

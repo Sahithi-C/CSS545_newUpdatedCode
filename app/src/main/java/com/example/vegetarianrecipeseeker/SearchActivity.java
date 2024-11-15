@@ -200,7 +200,7 @@ public class SearchActivity extends AppCompatActivity {
                 "Add rice on top, garnish, and steam for 10-15 mins."
         );
 
-        dbHelper.insertRecipe("Biryani", "", biryaniMandatory, biryaniOptional, biryaniInstructions);
+        dbHelper.insertRecipe("Biryani", "", 4, biryaniMandatory, biryaniOptional, biryaniInstructions);
 
         // Sample recipe 2: Paneer Butter Masala
         List<String> paneerMandatory = Arrays.asList(
@@ -227,6 +227,6 @@ public class SearchActivity extends AppCompatActivity {
                 "Add cream and garnish with coriander leaves."
         );
 
-        dbHelper.insertRecipe("Paneer Butter Masala", "", paneerMandatory, paneerOptional, paneerInstructions);
+        dbHelper.insertRecipe("Paneer Butter Masala", "", 1, paneerMandatory, paneerOptional, paneerInstructions);
     }
 }

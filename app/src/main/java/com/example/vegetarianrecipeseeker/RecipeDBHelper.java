@@ -35,12 +35,15 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
     private static final String KEY_STEP_NUMBER = "step_number";
     private static final String KEY_INSTRUCTION_TEXT = "instruction_text";
 
+    private static final String KEY_SPICE_LEVEL = "spice_level";
+
     // Create table statements
     private static final String CREATE_RECIPES_TABLE = "CREATE TABLE " + TABLE_RECIPES + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + KEY_TITLE + " TEXT,"
             + KEY_IMAGE_PATH + " TEXT,"
-            + KEY_IS_FAVORITE + " INTEGER DEFAULT 0"
+            + KEY_IS_FAVORITE + " INTEGER DEFAULT 0,"
+            + KEY_SPICE_LEVEL + " INTEGER DEFAULT 1"
             + ")";
 
     private static final String CREATE_INGREDIENTS_TABLE = "CREATE TABLE " + TABLE_INGREDIENTS + "("
@@ -79,7 +82,7 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
     }
 
     // Insert a new recipe
-    public long insertRecipe(String title, String imagePath, List<String> mandatoryIngredients,
+    public long insertRecipe(String title, String imagePath, int spiceLevel, List<String> mandatoryIngredients,
                              List<String> optionalIngredients, List<String> instructions) {
         SQLiteDatabase db = this.getWritableDatabase();
         long recipeId = -1;
@@ -90,6 +93,7 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
             ContentValues recipeValues = new ContentValues();
             recipeValues.put(KEY_TITLE, title);
             recipeValues.put(KEY_IMAGE_PATH, imagePath);
+            recipeValues.put(KEY_SPICE_LEVEL, spiceLevel);
             recipeId = db.insert(TABLE_RECIPES, null, recipeValues);
 
             // Insert mandatory ingredients
@@ -153,7 +157,7 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
 
         // Get recipe basic info
         Cursor recipeCursor = db.query(TABLE_RECIPES,
-                new String[]{KEY_ID, KEY_TITLE, KEY_IMAGE_PATH, KEY_IS_FAVORITE},
+                new String[]{KEY_ID, KEY_TITLE, KEY_IMAGE_PATH, KEY_IS_FAVORITE, KEY_SPICE_LEVEL},
                 KEY_TITLE + "=?", new String[]{title},
                 null, null, null);
 
@@ -162,6 +166,7 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
             recipe.title = recipeCursor.getString(1);
             recipe.imagePath = recipeCursor.getString(2);
             recipe.isFavorite = recipeCursor.getInt(3) == 1;
+            recipe.spiceLevel = recipeCursor.getInt(4);
 
             // Get mandatory ingredients
             Cursor mandatoryIngredientsCursor = db.query(TABLE_INGREDIENTS,
@@ -217,8 +222,13 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
         public String title;
         public String imagePath;
         public boolean isFavorite;
+        public int spiceLevel;
         public List<String> mandatoryIngredients = new ArrayList<>();
         public List<String> optionalIngredients = new ArrayList<>();
         public List<String> instructions = new ArrayList<>();
+
+        public int getSpiceLevel() {
+            return spiceLevel;
+        }
     }
 }
