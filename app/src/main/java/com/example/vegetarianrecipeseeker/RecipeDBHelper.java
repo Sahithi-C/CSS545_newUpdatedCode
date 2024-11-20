@@ -1,3 +1,4 @@
+
 package com.example.vegetarianrecipeseeker;
 
 import android.content.ContentValues;
@@ -17,6 +18,8 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
     private static final String TABLE_RECIPES = "recipes";
     private static final String TABLE_INGREDIENTS = "ingredients";
     private static final String TABLE_INSTRUCTIONS = "instructions";
+    private static final String KEY_COOKING_TIME = "cooking_time";
+    private static final String KEY_SPICE_LEVEL = "spice_level";
 
     // Common column names
     private static final String KEY_ID = "id";
@@ -35,15 +38,14 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
     private static final String KEY_STEP_NUMBER = "step_number";
     private static final String KEY_INSTRUCTION_TEXT = "instruction_text";
 
-    private static final String KEY_SPICE_LEVEL = "spice_level";
-
     // Create table statements
     private static final String CREATE_RECIPES_TABLE = "CREATE TABLE " + TABLE_RECIPES + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + KEY_TITLE + " TEXT,"
             + KEY_IMAGE_PATH + " TEXT,"
             + KEY_IS_FAVORITE + " INTEGER DEFAULT 0,"
-            + KEY_SPICE_LEVEL + " INTEGER DEFAULT 1"
+            + KEY_COOKING_TIME + " TEXT,"
+            + KEY_SPICE_LEVEL + " TEXT"
             + ")";
 
     private static final String CREATE_INGREDIENTS_TABLE = "CREATE TABLE " + TABLE_INGREDIENTS + "("
@@ -82,8 +84,9 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
     }
 
     // Insert a new recipe
-    public long insertRecipe(String title, String imagePath, int spiceLevel, List<String> mandatoryIngredients,
-                             List<String> optionalIngredients, List<String> instructions) {
+    public long insertRecipe(String title, String imagePath, String cookingTime, String spiceLevel,
+                             List<String> mandatoryIngredients, List<String> optionalIngredients,
+                             List<String> instructions) {
         SQLiteDatabase db = this.getWritableDatabase();
         long recipeId = -1;
 
@@ -93,6 +96,7 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
             ContentValues recipeValues = new ContentValues();
             recipeValues.put(KEY_TITLE, title);
             recipeValues.put(KEY_IMAGE_PATH, imagePath);
+            recipeValues.put(KEY_COOKING_TIME, cookingTime);
             recipeValues.put(KEY_SPICE_LEVEL, spiceLevel);
             recipeId = db.insert(TABLE_RECIPES, null, recipeValues);
 
@@ -157,7 +161,8 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
 
         // Get recipe basic info
         Cursor recipeCursor = db.query(TABLE_RECIPES,
-                new String[]{KEY_ID, KEY_TITLE, KEY_IMAGE_PATH, KEY_IS_FAVORITE, KEY_SPICE_LEVEL},
+                new String[]{KEY_ID, KEY_TITLE, KEY_IMAGE_PATH, KEY_IS_FAVORITE,
+                        KEY_COOKING_TIME, KEY_SPICE_LEVEL},
                 KEY_TITLE + "=?", new String[]{title},
                 null, null, null);
 
@@ -166,7 +171,8 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
             recipe.title = recipeCursor.getString(1);
             recipe.imagePath = recipeCursor.getString(2);
             recipe.isFavorite = recipeCursor.getInt(3) == 1;
-            recipe.spiceLevel = recipeCursor.getInt(4);
+            recipe.cookingTime = recipeCursor.getString(4);
+            recipe.spiceLevel = recipeCursor.getString(5);
 
             // Get mandatory ingredients
             Cursor mandatoryIngredientsCursor = db.query(TABLE_INGREDIENTS,
@@ -208,12 +214,70 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
         return recipe;
     }
 
+    public int getFavoritesCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_RECIPES,
+                new String[]{"COUNT(*)"},
+                KEY_IS_FAVORITE + "=1",
+                null, null, null, null);
+
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
     // Update favorite status
-    public void updateFavoriteStatus(long recipeId, boolean isFavorite) {
+    public boolean updateFavoriteStatus(long recipeId, boolean isFavorite) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+        // If trying to add to favorites
+        if (isFavorite) {
+            // Check if already at limit
+            if (getFavoritesCount() >= 5) {
+                return false; // Indicates failure due to limit
+            }
+        }
+
         ContentValues values = new ContentValues();
         values.put(KEY_IS_FAVORITE, isFavorite ? 1 : 0);
-        db.update(TABLE_RECIPES, values, KEY_ID + "=?", new String[]{String.valueOf(recipeId)});
+        int rowsAffected = db.update(TABLE_RECIPES,
+                values,
+                KEY_ID + "=?",
+                new String[]{String.valueOf(recipeId)});
+        return rowsAffected > 0;
+    }
+
+    public boolean canAddMoreFavorites() {
+        return getFavoritesCount() < 5;
+    }
+
+    public int getRemainingFavoriteSlots() {
+        return 5 - getFavoritesCount();
+    }
+
+    // Get all favorite recipes
+    public List<String> getFavouriteRecipes() {
+        List<String> favourites = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Query to get titles of recipes where is_favorite = 1
+        Cursor cursor = db.query(TABLE_RECIPES,
+                new String[]{KEY_TITLE},
+                KEY_IS_FAVORITE + "=?",
+                new String[]{"1"},
+                null, null,
+                KEY_TITLE + " ASC");
+
+        if (cursor.moveToFirst()) {
+            do {
+                favourites.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return favourites;
     }
 
     // Recipe class to hold all recipe data
@@ -222,13 +286,10 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
         public String title;
         public String imagePath;
         public boolean isFavorite;
-        public int spiceLevel;
+        public String cookingTime;
+        public String spiceLevel;
         public List<String> mandatoryIngredients = new ArrayList<>();
         public List<String> optionalIngredients = new ArrayList<>();
         public List<String> instructions = new ArrayList<>();
-
-        public int getSpiceLevel() {
-            return spiceLevel;
-        }
     }
 }

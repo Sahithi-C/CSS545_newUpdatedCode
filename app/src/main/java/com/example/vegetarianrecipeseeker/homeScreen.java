@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,9 +19,11 @@ import android.widget.Toast;
 import android.view.ViewGroup;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -33,7 +36,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.widget.Toolbar;
 
-public class homeScreen extends AppCompatActivity {
+public class homeScreen extends BaseActivity {
 
     DrawerLayout drawerLayout;
 
@@ -59,6 +62,76 @@ public class homeScreen extends AppCompatActivity {
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.nav_home) {
+                // Replace with home fragment
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout, new HomeFragment())
+                        .commit();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+            else if (itemId == R.id.nav_settings) {
+                // Navigate to Settings activity
+                Intent settingsIntent = new Intent(homeScreen.this, settings.class);
+                startActivity(settingsIntent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+            else if (itemId == R.id.nav_about) {
+                // Show "About Us" dialog
+                showAboutUsDialog();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+            else if (itemId == R.id.nav_logout) {
+                // Show confirmation dialog before logout
+                new AlertDialog.Builder(this)
+                        .setTitle("Logout")
+                        .setMessage("Are you sure you want to logout?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            // Perform logout
+                            // You might want to clear any saved user data here
+                            Intent intent = new Intent(homeScreen.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+                return true;
+            }
+
+            return false;
+        });
+
+        // Find the Recipes List button
+        Button recipesListButton = findViewById(R.id.recipesListButton);
+        recipesListButton.setOnClickListener(v -> {
+            Intent intent = new Intent(homeScreen.this, recipesList.class);
+            startActivity(intent);
+        });
+
+        Button favouritesButton = findViewById(R.id.favouritesButton);
+        favouritesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(homeScreen.this, Favourites.class);
+            startActivity(intent);
+        });
+
+        Button quickRecipesButton = findViewById(R.id.quickRecipesButton);
+        quickRecipesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(homeScreen.this, quickRecipes.class);
+            startActivity(intent);
+        });
+
+        Button spiceLevelButton = findViewById(R.id.spiceLevelButton);
+        spiceLevelButton.setOnClickListener(v -> {
+            Intent intent = new Intent(homeScreen.this, spiceLevel.class);
+            startActivity(intent);
+        });
+
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -82,5 +155,18 @@ public class homeScreen extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    // Method to show About Us dialog
+    private void showAboutUsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("About Us");
+        builder.setMessage("Welcome to Vegetarian Recipe Seeker!\n\n" +
+                "We’re here to make your cooking journey simple, quick, and safe. Our app is designed to help you find delicious recipes without the hassle of scrolling through lengthy videos or websites.\n\n" +
+                "Your safety is our priority – we highlight allergens and important warnings before you view any recipe, so you can cook with confidence. Plus, with the option to save all your favorite recipes in one place, meal planning becomes effortless and organized.\n\n" +
+                "Whether you're meal prepping or just looking for quick inspiration, we’re here to make your kitchen time more enjoyable.\n\n" +
+                "Happy cooking!");
+        builder.setPositiveButton("OK", null);
+        builder.create().show();
     }
 }

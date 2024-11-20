@@ -18,11 +18,11 @@
         android:text="Vegetarian Recipe Seeker"
         android:textColor="@color/white"
         android:textStyle="bold"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:text="contact@vegRecipeSeekers.com"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:layout_marginBottom="16dp"/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:text="contact@vegRecipeSeekers.com"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="14sp"-->
+<!--        android:layout_marginBottom="16dp"/>-->
 </LinearLayout>

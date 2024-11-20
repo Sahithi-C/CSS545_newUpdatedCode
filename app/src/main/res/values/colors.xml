@@ -15,4 +15,6 @@
     <color name="yellow">#FFD700</color>
     <color name="light_yellow">#FFFFE0</color>
 
+    <color name="text_color">@color/black</color>
+
 </resources>

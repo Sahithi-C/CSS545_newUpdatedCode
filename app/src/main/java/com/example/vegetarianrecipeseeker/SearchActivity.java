@@ -1,24 +1,28 @@
 package com.example.vegetarianrecipeseeker;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.viewmodel.SearchViewModel;
+
 import java.util.ArrayList;
-import androidx.annotation.NonNull;
-import java.util.Arrays;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
-    private RecipeDBHelper dbHelper;
+    private SearchViewModel searchViewModel;
     private SearchView searchView;
     private String savedSearchQuery = "";
     private int savedScrollPosition = 0;
@@ -32,13 +36,15 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        // Initialize database
-        dbHelper = new RecipeDBHelper(this);
+        // Initialize ViewModel
+        searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
         // Add sample data if the database is empty
-        if (dbHelper.getAllRecipeTitles().isEmpty()) {
-            addSampleRecipes();
-        }
+        searchViewModel.getAllRecipeTitles().observe(this, titles -> {
+            if (titles.isEmpty()) {
+                searchViewModel.insertSampleData();
+            }
+        });
 
         // Setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -47,11 +53,16 @@ public class SearchActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // Setup ListView with data from database
+        // Setup ListView
         listView = findViewById(R.id.listView);
-        List<String> recipeList = dbHelper.getAllRecipeTitles();
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeList);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
         listView.setAdapter(arrayAdapter);
+
+        // Observe recipe titles
+        searchViewModel.getAllRecipeTitles().observe(this, titles -> {
+            arrayAdapter.clear();
+            arrayAdapter.addAll(titles);
+        });
 
         // Handle recipe selection
         listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -129,7 +140,10 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 savedSearchQuery = newText;
-                arrayAdapter.getFilter().filter(newText);
+                searchViewModel.searchRecipes(newText).observe(SearchActivity.this, filteredTitles -> {
+                    arrayAdapter.clear();
+                    arrayAdapter.addAll(filteredTitles);
+                });
                 return false;
             }
         });
@@ -169,64 +183,5 @@ public class SearchActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_SEARCH_QUERY, savedSearchQuery);
         outState.putInt(KEY_SCROLL_POSITION, listView.getFirstVisiblePosition());
-    }
-
-    private void addSampleRecipes() {
-        // Sample recipe 1: Biryani
-        List<String> biryaniMandatory = Arrays.asList(
-                "1 big Onion",
-                "2 big tomatoes (puree)",
-                "250 gms Rice",
-                "2 tbsp Curd",
-                "1 tbsp Ginger-Garlic paste"
-        );
-
-        List<String> biryaniOptional = Arrays.asList(
-                "2 cups of vegetables (carrot, bell pepper, cauliflower, peas, beans)",
-                "cottage cheese (paneer)"
-        );
-
-        List<String> biryaniInstructions = Arrays.asList(
-                "Cook rice until al dente (Basmati rice recommended).",
-                "Heat 4 tbsp of oil in a pan.",
-                "Add whole spices: cumin seeds, bay leaf, cardamom, cloves, cinnamon stick, star anise.",
-                "Add julienned onions and cook until golden brown.",
-                "Lower heat, add ginger-garlic paste, and ground spices. Cook for 2 mins.",
-                "(Optional) Add vegetables and cook for 5-7 mins.",
-                "Add curd and let cook for 5 mins.",
-                "Add tomato puree, salt, and kasuri methi. Cook until water evaporates.",
-                "(Optional) Add paneer cubes, lightly pan-fried.",
-                "Add 1/2 glass of water.",
-                "Add rice on top, garnish, and steam for 10-15 mins."
-        );
-
-        dbHelper.insertRecipe("Biryani", "", 4, biryaniMandatory, biryaniOptional, biryaniInstructions);
-
-        // Sample recipe 2: Paneer Butter Masala
-        List<String> paneerMandatory = Arrays.asList(
-                "250g Paneer",
-                "2 Onions",
-                "3 Tomatoes",
-                "2 tbsp Butter",
-                "1 tbsp Cream"
-        );
-
-        List<String> paneerOptional = Arrays.asList(
-                "Kasuri Methi",
-                "Coriander leaves for garnishing"
-        );
-
-        List<String> paneerInstructions = Arrays.asList(
-                "Cut paneer into cubes and soak in warm water.",
-                "Sauté onions until golden brown.",
-                "Add tomatoes and cook until soft.",
-                "Blend the mixture into a smooth paste.",
-                "Heat butter in a pan and add the paste.",
-                "Add spices and cook for 5 minutes.",
-                "Add paneer cubes and simmer for 5 minutes.",
-                "Add cream and garnish with coriander leaves."
-        );
-
-        dbHelper.insertRecipe("Paneer Butter Masala", "", 1, paneerMandatory, paneerOptional, paneerInstructions);
     }
 }
