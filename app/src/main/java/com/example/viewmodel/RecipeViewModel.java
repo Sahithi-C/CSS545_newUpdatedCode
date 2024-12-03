@@ -6,7 +6,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.data.RecipeWithDetails;
+import com.example.models.Allergen;
 import com.example.repository.RecipeRepository;
+
+import java.util.List;
 
 public class RecipeViewModel extends AndroidViewModel {
     private final RecipeRepository repository;
@@ -26,5 +29,9 @@ public class RecipeViewModel extends AndroidViewModel {
 
     public void updateFavoriteStatus(long recipeId, boolean isFavorite) {
         repository.updateFavoriteStatus(recipeId, isFavorite);
+    }
+
+    public LiveData<List<Allergen>> getAllergensByRecipeId(long recipeId) {
+        return repository.getAllergensByRecipeId(recipeId);
     }
 }

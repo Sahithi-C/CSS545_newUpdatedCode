@@ -1,15 +1,20 @@
 package com.example.repository;
 
 import android.app.Application;
+import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.dao.RecipeDao;
 import com.example.data.RecipeWithDetails;
 import com.example.database.RecipeDatabase;
+import com.example.models.Allergen;
 import com.example.models.Ingredient;
 import com.example.models.Instruction;
 import com.example.models.Recipe;
+import com.example.data.AllergenDao;
+import com.example.models.Allergen;
+import com.example.models.RecipeAllergenCrossRef;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,5 +133,42 @@ public class RecipeRepository {
                 });
             }
         };
+    }
+
+    public LiveData<List<Allergen>> getAllergensByRecipeId(long recipeId) {
+        return new LiveData<List<Allergen>>() {
+            @Override
+            protected void onActive() {
+                super.onActive();
+                executorService.execute(() -> {
+                    List<Allergen> allergens = recipeDao.getAllergensByRecipeId(recipeId);
+                    postValue(allergens);
+                });
+            }
+        };
+    }
+
+    public void insertAllergen(Allergen allergen) {
+        executorService.execute(() -> recipeDao.insertAllergen(allergen));
+    }
+
+    public void linkRecipeWithAllergen(long recipeId, long allergenId) {
+        executorService.execute(() -> {
+            RecipeAllergenCrossRef crossRef = new RecipeAllergenCrossRef(recipeId, allergenId);
+            recipeDao.insertRecipeAllergenCrossRef(crossRef);
+        });
+    }
+
+    public void updateAllergensForRecipe(long recipeId, List<Allergen> allergens) {
+        executorService.execute(() -> {
+            // Delete old allergens
+            recipeDao.deleteAllergensByRecipeId(recipeId);
+
+            // Insert new cross-references
+            for (Allergen allergen : allergens) {
+                RecipeAllergenCrossRef crossRef = new RecipeAllergenCrossRef(recipeId, allergen.id);
+                recipeDao.insertRecipeAllergenCrossRef(crossRef);
+            }
+        });
     }
 }

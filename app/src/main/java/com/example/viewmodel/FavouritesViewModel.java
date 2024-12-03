@@ -30,7 +30,7 @@ public class FavouritesViewModel extends AndroidViewModel {
         loadFavoriteRecipes();
     }
 
-    private void loadFavoriteRecipes() {
+    public void loadFavoriteRecipes() {
         executorService.execute(() -> {
             List<Recipe> recipes = recipeDao.getFavoriteRecipes();
             ((MutableLiveData<List<Recipe>>) favoriteRecipes).postValue(recipes);
@@ -39,5 +39,15 @@ public class FavouritesViewModel extends AndroidViewModel {
 
     public LiveData<List<Recipe>> getFavoriteRecipes() {
         return favoriteRecipes;
+    }
+
+    public void removeFromFavorites(long recipeId) {
+        executorService.execute(() -> {
+            // Update favorite status in the database
+            recipeDao.updateFavoriteStatus(recipeId, false);
+
+            // Reload the favorite recipes list
+            loadFavoriteRecipes();
+        });
     }
 }

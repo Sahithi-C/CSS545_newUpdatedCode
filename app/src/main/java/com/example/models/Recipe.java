@@ -24,4 +24,7 @@ public class Recipe {
 
     @ColumnInfo(name = "spice_level")
     public String spiceLevel;
+
+    @ColumnInfo(name = "allergens")
+    public String allergens;
 }

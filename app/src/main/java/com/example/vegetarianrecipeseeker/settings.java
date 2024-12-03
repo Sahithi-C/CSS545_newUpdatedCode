@@ -33,13 +33,13 @@ public class settings extends AppCompatActivity {
     private static final String KEY_NOTIFICATIONS = "notifications_enabled";
     private static final String KEY_DARK_MODE = "dark_mode_enabled";
     private static final String CHANNEL_ID = "DailyRecipeNotificationChannel";
+    private static final String KEY_FIRST_TIME_NOTIFICATION = "first_time_notification";
 
-    // Permission request launcher
     private ActivityResultLauncher<String> notificationPermissionLauncher;
-
     private SharedPreferences sharedPreferences;
     private Switch notificationSwitch;
     private Switch darkModeSwitch;
+    private boolean isFirstTimeNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +47,12 @@ public class settings extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_settings);
 
-        // Create notification channel
-        createNotificationChannel();
-
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        isFirstTimeNotification = sharedPreferences.getBoolean(KEY_FIRST_TIME_NOTIFICATION, true);
+
+        // Create notification channel
+        createNotificationChannel();
 
         // Initialize permission launcher
         initializeNotificationPermissionLauncher();
@@ -69,57 +70,14 @@ public class settings extends AppCompatActivity {
         setupListeners();
     }
 
-    private void checkAndRequestNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED) {
-                // Directly request permissions
-                ActivityCompat.requestPermissions(
-                        this,
-                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
-                        NOTIFICATION_PERMISSION_REQUEST_CODE
-                );
-            }
+    private void setupToolbar() {
+        Toolbar toolbar = findViewById(R.id.settings_toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Settings");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(
-            int requestCode,
-            String[] permissions,
-            int[] grantResults
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == NOTIFICATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, enable notifications
-                Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show();
-            } else {
-                // Permission denied
-                Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void initializeNotificationPermissionLauncher() {
-        notificationPermissionLauncher = registerForActivityResult(
-                new ActivityResultContracts.RequestPermission(),
-                isGranted -> {
-                    if (isGranted) {
-                        // Permission granted, enable notifications
-                        updateNotifications(true);
-                    } else {
-                        // Permission denied, turn off switch
-                        notificationSwitch.setChecked(false);
-                        saveNotificationSetting(false);
-                        Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
     }
 
     private void createNotificationChannel() {
@@ -135,24 +93,14 @@ public class settings extends AppCompatActivity {
         }
     }
 
-    private void setupToolbar() {
-        Toolbar toolbar = findViewById(R.id.settings_toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Settings");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-    }
-
     private void initializeControls() {
         notificationSwitch = findViewById(R.id.notification_switch);
         darkModeSwitch = findViewById(R.id.dark_mode_switch);
     }
 
     private void loadSavedSettings() {
-        // Load notifications setting
-        boolean notificationsEnabled = sharedPreferences.getBoolean(KEY_NOTIFICATIONS, true);
+        // Load notifications setting - default to false
+        boolean notificationsEnabled = sharedPreferences.getBoolean(KEY_NOTIFICATIONS, false);
         notificationSwitch.setChecked(notificationsEnabled);
 
         // Load dark mode setting
@@ -160,22 +108,49 @@ public class settings extends AppCompatActivity {
         darkModeSwitch.setChecked(darkModeEnabled);
     }
 
+    private void initializeNotificationPermissionLauncher() {
+        notificationPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (isGranted) {
+                        // Permission granted, enable notifications
+                        enableNotifications();
+                    } else {
+                        // Permission denied, keep switch off
+                        notificationSwitch.setChecked(false);
+                        Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
     private void setupListeners() {
         // Notification switch listener
         notificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                // Check and request notification permission for Android 13+
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    checkNotificationPermission();
+                if (isFirstTimeNotification) {
+                    // First time enabling notifications, request permission
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        requestNotificationPermission();
+                    } else {
+                        // For older versions, enable directly
+                        enableNotifications();
+                    }
                 } else {
-                    // For older Android versions, directly enable
-                    saveNotificationSetting(true);
-                    updateNotifications(true);
+                    // Not first time, check if permission is granted
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        if (checkNotificationPermission()) {
+                            enableNotifications();
+                        } else {
+                            requestNotificationPermission();
+                        }
+                    } else {
+                        enableNotifications();
+                    }
                 }
             } else {
                 // Disable notifications
-                saveNotificationSetting(false);
-                updateNotifications(false);
+                disableNotifications();
             }
         });
 
@@ -186,43 +161,41 @@ public class settings extends AppCompatActivity {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
-    private void checkNotificationPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-        ) == PackageManager.PERMISSION_GRANTED) {
-            // Permission already granted
-            saveNotificationSetting(true);
-            updateNotifications(true);
-        } else {
-            // Request permission
+    private boolean checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED;
+        }
+        return true;
+    }
+
+    private void requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
         }
     }
 
-    private void saveNotificationSetting(boolean enabled) {
+    private void enableNotifications() {
+        // Save that it's no longer first time
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(KEY_NOTIFICATIONS, enabled);
+        editor.putBoolean(KEY_FIRST_TIME_NOTIFICATION, false);
+        editor.putBoolean(KEY_NOTIFICATIONS, true);
         editor.apply();
+
+        // Schedule notifications
+        scheduleDaily();
+        Toast.makeText(this, "Daily recipe notifications enabled", Toast.LENGTH_SHORT).show();
     }
 
-    private void saveDarkModeSetting(boolean enabled) {
+    private void disableNotifications() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(KEY_DARK_MODE, enabled);
+        editor.putBoolean(KEY_NOTIFICATIONS, false);
         editor.apply();
-    }
 
-    private void updateNotifications(boolean enabled) {
-        if (enabled) {
-            // Schedule daily notification
-            scheduleDaily();
-            Toast.makeText(this, "Daily recipe notifications enabled", Toast.LENGTH_SHORT).show();
-        } else {
-            // Cancel scheduled notifications
-            cancelDailyNotification();
-            Toast.makeText(this, "Daily recipe notifications disabled", Toast.LENGTH_SHORT).show();
-        }
+        cancelDailyNotification();
+        Toast.makeText(this, "Daily recipe notifications disabled", Toast.LENGTH_SHORT).show();
     }
 
     private void scheduleDaily() {
@@ -267,6 +240,12 @@ public class settings extends AppCompatActivity {
         );
 
         alarmManager.cancel(pendingIntent);
+    }
+
+    private void saveDarkModeSetting(boolean enabled) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(KEY_DARK_MODE, enabled);
+        editor.apply();
     }
 
     private void updateDarkMode(boolean enabled) {

@@ -1,5 +1,6 @@
 package com.example.vegetarianrecipeseeker;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,13 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+
+        // Check orientation and set appropriate layout
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_signup_land);
+        } else {
+            setContentView(R.layout.activity_signup);
+        }
 
         databaseHelper = new loginDBHelper(this);
 

@@ -76,4 +76,8 @@ public class Favourites extends AppCompatActivity {
             }
         });
     }
+
+    public void refreshFavorites() {
+        favouritesViewModel.loadFavoriteRecipes();
+    }
 }

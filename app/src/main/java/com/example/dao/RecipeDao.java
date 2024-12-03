@@ -11,6 +11,9 @@ import com.example.models.Ingredient;
 import com.example.models.Instruction;
 import com.example.models.Recipe;
 
+import com.example.models.Allergen;
+import com.example.models.RecipeAllergenCrossRef;
+
 import java.util.List;
 
 @Dao
@@ -60,4 +63,18 @@ public interface RecipeDao {
 
         return recipeId;
     }
+
+    @Insert
+    long insertAllergen(Allergen allergen);
+
+    @Query("SELECT allergens.* FROM allergens " +
+            "INNER JOIN recipe_allergen_junction ON allergens.id = recipe_allergen_junction.allergenId " +
+            "WHERE recipe_allergen_junction.recipeId = :recipeId")
+    List<Allergen> getAllergensByRecipeId(long recipeId);
+
+    @Insert
+    void insertRecipeAllergenCrossRef(RecipeAllergenCrossRef crossRef);
+
+    @Query("DELETE FROM recipe_allergen_junction WHERE recipeId = :recipeId")
+    void deleteAllergensByRecipeId(long recipeId);
 }

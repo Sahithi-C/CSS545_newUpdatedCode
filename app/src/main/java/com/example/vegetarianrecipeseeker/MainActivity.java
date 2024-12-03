@@ -2,6 +2,7 @@
 package com.example.vegetarianrecipeseeker;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +25,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        // Check orientation and set appropriate layout
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_main_land);
+        } else {
+            setContentView(R.layout.activity_main);
+        }
 
         databaseHelper = new loginDBHelper(this);
 
@@ -44,12 +50,21 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (databaseHelper.checkUser(user, pass)) {
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, homeScreen.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(MainActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                int loginResult = databaseHelper.checkUser(user, pass);
+                switch (loginResult) {
+                    case 1: // Successful login
+                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, homeScreen.class);
+                        startActivity(intent);
+                        break;
+                    case 0: // User does not exist
+                        Toast.makeText(MainActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
+                        break;
+                    case -1: // Invalid credentials
+                        Toast.makeText(MainActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                        break;
+                    default: // Error case
+                        Toast.makeText(MainActivity.this, "Login error", Toast.LENGTH_SHORT).show();
                 }
             }
         });

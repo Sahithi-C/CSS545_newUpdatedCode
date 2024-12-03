@@ -55,8 +55,7 @@ public class loginDBHelper extends SQLiteOpenHelper {  // Changed class name to 
         }
     }
 
-    // Method to check user credentials
-    public boolean checkUser(String username, String password) {
+    public int checkUser(String username, String password) {
         try {
             SQLiteDatabase db = this.getReadableDatabase();
 
@@ -64,15 +63,30 @@ public class loginDBHelper extends SQLiteOpenHelper {  // Changed class name to 
             String encodedUsername = Base64.encodeToString(username.getBytes(), Base64.DEFAULT);
             String encodedPassword = Base64.encodeToString(password.getBytes(), Base64.DEFAULT);
 
-            String selection = COLUMN_USERNAME + " = ? AND " + COLUMN_PASSWORD + " = ?";
-            String[] selectionArgs = {encodedUsername, encodedPassword};
+            // First, check if user exists
+            String[] columns = {COLUMN_ID};
+            String selection = COLUMN_USERNAME + " = ?";
+            String[] selectionArgs = {encodedUsername};
 
-            Cursor cursor = db.query(TABLE_USERS, null, selection, selectionArgs, null, null, null);
-            boolean exists = cursor.getCount() > 0;
+            Cursor cursor = db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null);
+
+            if (cursor.getCount() == 0) {
+                // User does not exist
+                cursor.close();
+                return 0; // User not found
+            }
+
+            // User exists, now check password
+            selection = COLUMN_USERNAME + " = ? AND " + COLUMN_PASSWORD + " = ?";
+            selectionArgs = new String[]{encodedUsername, encodedPassword};
+
+            cursor = db.query(TABLE_USERS, null, selection, selectionArgs, null, null, null);
+            boolean passwordCorrect = cursor.getCount() > 0;
             cursor.close();
-            return exists;
+
+            return passwordCorrect ? 1 : -1; // 1 for successful login, -1 for wrong password
         } catch (Exception e) {
-            return false;
+            return -2; // Error case
         }
     }
 

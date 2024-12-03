@@ -40,7 +40,6 @@ public class homeScreen extends BaseActivity {
 
     DrawerLayout drawerLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,43 +56,33 @@ public class homeScreen extends BaseActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
-        }
+        // Set home as checked in navigation view by default
+        navigationView.setCheckedItem(R.id.nav_home);
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
             if (itemId == R.id.nav_home) {
-                // Replace with home fragment
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_layout, new HomeFragment())
-                        .commit();
+                // Just close the drawer when home is selected
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
             else if (itemId == R.id.nav_settings) {
-                // Navigate to Settings activity
                 Intent settingsIntent = new Intent(homeScreen.this, settings.class);
                 startActivity(settingsIntent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
             else if (itemId == R.id.nav_about) {
-                // Show "About Us" dialog
                 showAboutUsDialog();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
             else if (itemId == R.id.nav_logout) {
-                // Show confirmation dialog before logout
                 new AlertDialog.Builder(this)
                         .setTitle("Logout")
                         .setMessage("Are you sure you want to logout?")
                         .setPositiveButton("Yes", (dialog, which) -> {
-                            // Perform logout
-                            // You might want to clear any saved user data here
                             Intent intent = new Intent(homeScreen.this, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
@@ -107,7 +96,7 @@ public class homeScreen extends BaseActivity {
             return false;
         });
 
-        // Find the Recipes List button
+        // Initialize buttons
         Button recipesListButton = findViewById(R.id.recipesListButton);
         recipesListButton.setOnClickListener(v -> {
             Intent intent = new Intent(homeScreen.this, recipesList.class);
@@ -131,14 +120,6 @@ public class homeScreen extends BaseActivity {
             Intent intent = new Intent(homeScreen.this, spiceLevel.class);
             startActivity(intent);
         });
-
-    }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
-        fragmentTransaction.commit();
     }
 
     @Override
@@ -149,7 +130,6 @@ public class homeScreen extends BaseActivity {
         searchView.setQueryHint("Search here");
 
         searchView.setOnSearchClickListener(view -> {
-            // Start the new activity when search is clicked
             Intent intent = new Intent(homeScreen.this, SearchActivity.class);
             startActivity(intent);
         });
@@ -157,14 +137,13 @@ public class homeScreen extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    // Method to show About Us dialog
     private void showAboutUsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("About Us");
         builder.setMessage("Welcome to Vegetarian Recipe Seeker!\n\n" +
-                "We’re here to make your cooking journey simple, quick, and safe. Our app is designed to help you find delicious recipes without the hassle of scrolling through lengthy videos or websites.\n\n" +
+                "We're here to make your cooking journey simple, quick, and safe. Our app is designed to help you find delicious recipes without the hassle of scrolling through lengthy videos or websites.\n\n" +
                 "Your safety is our priority – we highlight allergens and important warnings before you view any recipe, so you can cook with confidence. Plus, with the option to save all your favorite recipes in one place, meal planning becomes effortless and organized.\n\n" +
-                "Whether you're meal prepping or just looking for quick inspiration, we’re here to make your kitchen time more enjoyable.\n\n" +
+                "Whether you're meal prepping or just looking for quick inspiration, we're here to make your kitchen time more enjoyable.\n\n" +
                 "Happy cooking!");
         builder.setPositiveButton("OK", null);
         builder.create().show();
