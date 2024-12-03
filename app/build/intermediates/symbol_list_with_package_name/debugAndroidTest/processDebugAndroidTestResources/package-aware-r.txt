@@ -1,0 +1,3 @@
+com.example.vegetarianrecipeseeker.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

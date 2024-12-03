@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="blue">#0000FF</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="purple">#8692f7</color>
+    <color name="red">#FF0000</color>
+    <color name="text_color">@color/black</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#FFD700</color>
+    <string name="app_name">Vegetarian Recipe Seeker</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <style name="Base.Theme.VegetarianRecipeSeeker" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/blue</item>
+        <item name="colorSecondaryVariant">@color/blue</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+    <style name="Theme.VegetarianRecipeSeeker" parent="Base.Theme.VegetarianRecipeSeeker"/>
+</resources>

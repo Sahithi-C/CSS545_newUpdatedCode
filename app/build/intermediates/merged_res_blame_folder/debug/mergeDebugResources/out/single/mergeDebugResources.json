@@ -1,0 +1,374 @@
+[
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_circle_notifications_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_circle_notifications_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_paneer_butter_masala.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_paneer_butter_masala.png"
+    },
+    {
+        "merged": "com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_paneer_biryani.png.flat",
+        "source": "com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_paneer_biryani.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_spinach_soup.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_spinach_soup.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_home_screen.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_home_screen.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_custom_edittext.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/custom_edittext.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_settings.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_search_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_search_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_arrow_upward_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_arrow_upward_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_favorite_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_favorite_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_veg_momos.jpeg.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_veg_momos.jpeg"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/anim_slide_out.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/anim/slide_out.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_signup_land.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_signup_land.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_recipe_detail.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_recipe_detail.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_fragment_home.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_favorite_border_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_favorite_border_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/menu_actionbar_menu.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/menu/actionbar_menu.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_header1.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/header1.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_spice_level_land.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_spice_level_land.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_arrow_downward_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_arrow_downward_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_main_land.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_main_land.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_home_screen_land.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_home_screen_land.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_list_customtext.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/list_customtext.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_corn_rice.jpg.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_corn_rice.jpg"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_arrow_back_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_arrow_back_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/anim_slide_in.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/anim/slide_in.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_access_time_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_access_time_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_logo.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/logo.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_recipe_detail_land.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_recipe_detail_land.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_logo1.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/logo1.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_github.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/github.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_okra_fry_curry.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_okra_fry_curry.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_veg_hakka_noodles.jpg.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_veg_hakka_noodles.jpg"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_cream_of_spinach_soup.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_cream_of_spinach_soup.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/xml_backup_rules.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_corn_rice.jpeg.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_corn_rice.jpeg"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_twitter.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/twitter.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_quick_recipes_land.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_quick_recipes_land.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_dialogbkg.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/dialogbkg.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_loginbkg.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/loginbkg.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_circle_button_background.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/circle_button_background.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_warning_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_warning_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_paneer_biryani.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_paneer_biryani.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-anydpi/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_nav_header.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/nav_header.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_settings_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_settings_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_recipes_list_land.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_recipes_list_land.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_home_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_home_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_lock_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_lock_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_spice_level.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_spice_level.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_favourites_land.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_favourites_land.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_quick_recipes.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_quick_recipes.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_thermostat_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_thermostat_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/menu_nav_menu.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/menu/nav_menu.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_search.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_search.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_done_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_done_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_cream_of_spinach_soup.jpeg.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_cream_of_spinach_soup.jpeg"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_favourites.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_favourites.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_exit_to_app_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_exit_to_app_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_recipes_list.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_recipes_list.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_facebook.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/facebook.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_cooking.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/cooking.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_fried_rice.jpeg.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_fried_rice.jpeg"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_headerbkg.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/headerbkg.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_dialogue_allergen_warning.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/dialogue_allergen_warning.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_person_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_person_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_upma.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_upma.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-anydpi/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_corn_rice.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_corn_rice.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_signup.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_signup.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_remove_red_eye_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_remove_red_eye_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_cooking1.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/cooking1.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_peanut_chutney.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_peanut_chutney.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_activity_main.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_momos_chutney.jpeg.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_momos_chutney.jpeg"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_image1.png.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/image1.png"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/layout_toast_color_change.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/layout/toast_color_change.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_info_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_info_24.xml"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_recipe_fried_rice.jpg.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/recipe_fried_rice.jpg"
+    },
+    {
+        "merged": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-debug-36:/drawable_baseline_share_24.xml.flat",
+        "source": "/Users/phani-sahithi/.gradle/daemon/8.7/com.example.vegetarianrecipeseeker.app-main-38:/drawable/baseline_share_24.xml"
+    }
+]

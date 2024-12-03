@@ -1,0 +1,5 @@
+com.example.vegetarianrecipeseeker.test.app-core-1.6.1-0 /Users/phani-sahithi/.gradle/caches/transforms-4/3a8480bf7fe95bceee5d8f61919051ff/transformed/core-1.6.1/res
+com.example.vegetarianrecipeseeker.test.app-androidTest-1 /Users/phani-sahithi/Desktop/CSS 545/CSS545_updatedCode/app/build/generated/res/resValues/androidTest/debug
+com.example.vegetarianrecipeseeker.test.app-mergeDebugAndroidTestResources-2 /Users/phani-sahithi/Desktop/CSS 545/CSS545_updatedCode/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.example.vegetarianrecipeseeker.test.app-mergeDebugAndroidTestResources-3 /Users/phani-sahithi/Desktop/CSS 545/CSS545_updatedCode/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.example.vegetarianrecipeseeker.test.app-debugAndroidTest-4 /Users/phani-sahithi/Desktop/CSS 545/CSS545_updatedCode/app/build/intermediates/merged_res/debugAndroidTest/mergeDebugAndroidTestResources
